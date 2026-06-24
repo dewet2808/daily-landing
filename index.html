@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily — Build habits that actually stick</title>
+  <meta name="description" content="Track your habits, tasks, and goals every day. Daily is the simple, focused app that turns consistency into progress. Free on the App Store." />
+  <meta property="og:title" content="Daily — Build habits that actually stick" />
+  <meta property="og:description" content="One app for habits, tasks, goals, and progress. Built for people who want to show up every day." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:     #080C18;
+      --bg2:    #0C1020;
+      --card:   #101828;
+      --card2:  #151E30;
+      --border: #1C2840;
+      --accent: #5AC8FA;
+      --acc2:   #7DD8FB;
+      --text:   #EFF6FF;
+      --muted:  #4E6A88;
+      --green:  #34D399;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      background: rgba(8,12,24,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(90,200,250,0.08);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 19px; font-weight: 800; letter-spacing: -0.4px;
+    }
+    .nav-logo svg { flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 2px; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--muted);
+      padding: 7px 13px; border-radius: 8px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(90,200,250,0.06); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-appstore {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent); color: #0C1020;
+      font-size: 13px; font-weight: 700;
+      padding: 9px 18px; border-radius: 10px;
+      transition: opacity 0.15s;
+    }
+    .nav-appstore:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 140px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(90,200,250,0.12) 0%, transparent 60%);
+      top: 40%; left: 50%; transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.22);
+      border-radius: 100px; padding: 8px 18px;
+      font-size: 13px; font-weight: 600; color: var(--acc2);
+      margin-bottom: 28px; position: relative; z-index: 1;
+    }
+    .badge-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+
+    .hero h1 {
+      font-size: clamp(52px, 8vw, 100px);
+      font-weight: 900; line-height: 0.92; letter-spacing: -4px;
+      color: var(--text); margin-bottom: 24px;
+      position: relative; z-index: 1; max-width: 860px;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero > p {
+      font-size: clamp(17px, 2.2vw, 21px); color: var(--muted);
+      line-height: 1.65; max-width: 500px; margin-bottom: 44px;
+      position: relative; z-index: 1;
+    }
+    .hero-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; position: relative; z-index: 1; }
+    .appstore-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--accent); color: #080C18;
+      font-size: 16px; font-weight: 700; font-family: inherit;
+      padding: 16px 32px; border-radius: 14px; border: none;
+      transition: opacity .15s, transform .1s; text-decoration: none;
+    }
+    .appstore-btn:hover  { opacity: 0.9; }
+    .appstore-btn:active { transform: scale(0.97); }
+    .hero-note { font-size: 13px; color: var(--muted); }
+    .hero-note strong { color: var(--text); }
+
+    /* ── PHONE STRIP ── */
+    .phones-section {
+      padding: 0 24px 120px;
+      display: flex; justify-content: center;
+      gap: 28px; align-items: flex-start; flex-wrap: wrap;
+    }
+    .phone-wrap { position: relative; flex-shrink: 0; }
+    .phone-label {
+      text-align: center; font-size: 12px; font-weight: 700;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em;
+      margin-top: 16px;
+    }
+    .phone-glow {
+      position: absolute; width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(90,200,250,0.1) 0%, transparent 65%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
+    }
+    .phone {
+      background: var(--card); border-radius: 40px;
+      border: 1.5px solid var(--border); padding: 14px;
+      box-shadow: 0 0 0 5px #0A0E1A, 0 0 0 6.5px #1C2840, 0 32px 80px rgba(0,0,0,.7);
+      width: 220px; position: relative; z-index: 1;
+    }
+    .phone.large { width: 255px; }
+    .notch { width: 64px; height: 18px; background: #080C18; border-radius: 0 0 12px 12px; margin: 0 auto 10px; }
+    .screen { background: var(--bg); border-radius: 26px; padding: 14px; min-height: 370px; }
+
+    /* Screen UI */
+    .scr-title { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 14px; }
+    .scr-date  { font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 12px; margin-top: -8px; }
+    .scr-shdr  { font-size: 9px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin: 10px 0 7px; }
+    .habit-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+    .h-circle  { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--accent); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .h-circle.done { background: var(--accent); border-color: var(--accent); }
+    .h-circle.done::after { content:''; display:block; width:5px; height:3px; border-left:2px solid #080C18; border-bottom:2px solid #080C18; transform:rotate(-45deg) translate(0,-1px); }
+    .h-name   { font-size: 11px; color: var(--text); flex: 1; font-weight: 500; }
+    .h-name.done { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--border); }
+    .h-streak { font-size: 10px; color: var(--accent); font-weight: 600; }
+    .task-row  { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+    .t-sq      { width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--accent); flex-shrink: 0; }
+    .t-sq.done { background: var(--accent); }
+    .t-name   { font-size: 11px; color: var(--text); font-weight: 500; }
+    .t-name.done { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--border); }
+    .stat-pill { display: flex; justify-content: space-between; align-items: center; background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-top: 12px; }
+    .pill-num  { font-size: 22px; font-weight: 900; color: var(--accent); letter-spacing: -1px; }
+    .pill-lbl  { font-size: 9px; color: var(--muted); }
+    .goal-row  { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .g-ring-wrap { flex-shrink: 0; }
+    .g-name  { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .g-pct   { font-size: 10px; color: var(--accent); }
+    .prog-bar-row { margin-bottom: 4px; }
+    .prog-bar-label { display: flex; justify-content: space-between; font-size: 9px; margin-bottom: 3px; color: var(--muted); }
+    .prog-bar-track { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .prog-bar-fill  { height: 100%; border-radius: 99px; background: var(--accent); }
+
+    /* ── SECTION HEADERS ── */
+    .sec-label { text-align: center; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: 12px; }
+    .sec-title { text-align: center; font-size: clamp(30px, 4.5vw, 52px); font-weight: 900; letter-spacing: -2px; color: var(--text); margin-bottom: 14px; line-height: 1.0; }
+    .sec-title em { color: var(--accent); font-style: normal; }
+    .sec-sub { text-align: center; font-size: 17px; color: var(--muted); line-height: 1.65; max-width: 500px; margin: 0 auto; }
+
+    /* ── HOW IT WORKS ── */
+    .how { padding: 100px 24px; max-width: 960px; margin: 0 auto; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 56px; }
+    .step { text-align: center; }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.22);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 900; color: var(--accent);
+      margin: 0 auto 18px;
+    }
+    .step h3 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .step p  { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+    /* ── FEATURES GRID ── */
+    .features { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      margin-top: 56px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+    }
+    .feat-cell {
+      background: var(--card); padding: 32px 28px;
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      transition: background .2s;
+    }
+    .feat-cell:hover { background: var(--card2); }
+    .feat-cell:nth-child(3n)    { border-right: none; }
+    .feat-cell:nth-last-child(-n+3) { border-bottom: none; }
+    .feat-icon { font-size: 28px; margin-bottom: 14px; line-height: 1; }
+    .feat-cell h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .feat-cell p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── SPOTLIGHTS ── */
+    .spotlight { padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
+    .spotlight-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; padding: 60px 0; border-bottom: 1px solid var(--border);
+    }
+    .spotlight-row:last-child { border-bottom: none; }
+    .spotlight-row.flip { direction: rtl; }
+    .spotlight-row.flip > * { direction: ltr; }
+    .spot-tag {
+      display: inline-block; font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em; color: var(--accent);
+      background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.2);
+      border-radius: 6px; padding: 4px 10px; margin-bottom: 16px;
+    }
+    .spot-text h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 16px; }
+    .spot-text h2 em { color: var(--accent); font-style: normal; }
+    .spot-text p  { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .spot-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .spot-bullets li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--muted); line-height: 1.5; }
+    .spot-bullets li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+    .spot-bullets li strong { color: var(--text); }
+    .spot-visual {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px; display: flex; justify-content: center;
+    }
+
+    /* Spotlight visual elements */
+    .streak-vis { width: 100%; }
+    .streak-big { font-size: 72px; font-weight: 900; color: var(--accent); letter-spacing: -3px; line-height: 1; }
+    .streak-unit { font-size: 20px; color: var(--muted); font-weight: 500; margin-bottom: 24px; }
+    .dot-grid { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .spot-dot { width: 24px; height: 24px; border-radius: 6px; }
+    .spot-dot.on { background: var(--accent); }
+    .spot-dot.off { background: var(--border); }
+    .streak-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .streak-stat { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+    .streak-stat .val { font-size: 28px; font-weight: 800; color: var(--text); letter-spacing: -1px; }
+    .streak-stat .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .goal-vis { width: 100%; }
+    .goal-item { margin-bottom: 20px; }
+    .goal-head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+    .goal-name-big { font-size: 15px; font-weight: 700; color: var(--text); }
+    .goal-pct-big  { font-size: 14px; color: var(--accent); margin-left: auto; font-weight: 600; }
+    .goal-track  { height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 4px; }
+    .goal-fill   { height: 100%; border-radius: 99px; background: var(--accent); }
+    .goal-sub    { font-size: 12px; color: var(--muted); }
+
+    /* ── STATS STRIP ── */
+    .stats-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 70px 24px; }
+    .stats-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
+    .stat-val   { font-size: 52px; font-weight: 900; letter-spacing: -3px; line-height: 1; color: var(--accent); margin-bottom: 8px; }
+    .stat-label { font-size: 14px; color: var(--muted); font-weight: 500; line-height: 1.4; }
+
+    /* ── PRICING ── */
+    .pricing { padding: 100px 24px; max-width: 760px; margin: 0 auto; }
+    .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+    .price-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 36px 32px;
+    }
+    .price-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(160deg, rgba(90,200,250,0.06) 0%, var(--card) 60%);
+    }
+    .price-badge {
+      display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: #080C18; background: var(--accent);
+      border-radius: 6px; padding: 3px 9px; margin-bottom: 18px;
+    }
+    .price-name   { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .price-amount { font-size: 48px; font-weight: 900; letter-spacing: -2px; line-height: 1; color: var(--text); margin: 16px 0 6px; }
+    .price-amount span { font-size: 22px; vertical-align: top; margin-top: 8px; display: inline-block; font-weight: 600; letter-spacing: 0; }
+    .price-period { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .price-feats  { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .price-feats li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--muted); }
+    .price-feats li::before { content: '✓'; color: var(--green); font-weight: 800; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+    .price-feats li.dim::before { color: var(--border); }
+    .price-feats li.dim { opacity: .5; }
+    .pricing-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 24px; }
+    .pricing-note strong { color: var(--text); }
+
+    /* ── FAQ ── */
+    .faq { padding: 100px 24px; max-width: 720px; margin: 0 auto; }
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .faq-item { background: var(--card); border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      width: 100%; background: none; border: none; color: var(--text); font-family: inherit;
+      font-size: 15px; font-weight: 600; text-align: left;
+      padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      transition: background .15s;
+    }
+    .faq-q:hover { background: var(--card2); }
+    .faq-arrow { font-size: 18px; color: var(--accent); flex-shrink: 0; transition: transform .2s; }
+    .faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; padding: 0 24px 20px; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      padding: 120px 24px;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .bottom-cta .hero-glow { width: 700px; height: 700px; }
+    .bottom-cta h2 {
+      font-size: clamp(38px, 6vw, 76px); font-weight: 900; letter-spacing: -3px;
+      line-height: .92; margin-bottom: 20px; position: relative; z-index: 1;
+    }
+    .bottom-cta h2 em { color: var(--accent); font-style: normal; }
+    .bottom-cta p { font-size: 18px; color: var(--muted); line-height: 1.6; max-width: 420px; margin-bottom: 40px; position: relative; z-index: 1; }
+
+    /* ── INSTAGRAM ── */
+    .ig-section { padding: 0 24px 100px; max-width: 960px; margin: 0 auto; }
+    .ig-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 56px 40px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .ig-glow {
+      position: absolute; width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(90,200,250,0.08) 0%, transparent 65%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
+    }
+    .ig-icon {
+      width: 64px; height: 64px; border-radius: 18px;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; position: relative; z-index: 1;
+    }
+    .ig-card h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; position: relative; z-index: 1; }
+    .ig-card h2 em { color: var(--accent); font-style: normal; }
+    .ig-card p { font-size: 16px; color: var(--muted); line-height: 1.65; max-width: 460px; margin: 0 auto 32px; position: relative; z-index: 1; }
+    .ig-follow-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      color: #fff; font-size: 16px; font-weight: 700; font-family: inherit;
+      padding: 16px 36px; border-radius: 14px; border: none; cursor: pointer;
+      text-decoration: none; transition: opacity .15s, transform .1s;
+      position: relative; z-index: 1;
+    }
+    .ig-follow-btn:hover  { opacity: .9; }
+    .ig-follow-btn:active { transform: scale(.97); }
+    .ig-handle { font-size: 14px; color: var(--muted); margin-top: 14px; position: relative; z-index: 1; }
+    .ig-posts { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 32px; position: relative; z-index: 1; }
+    .ig-chip {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 8px 14px;
+      font-size: 13px; color: var(--muted); font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 48px 40px;
+      display: grid; grid-template-columns: 1fr auto auto auto; align-items: start; gap: 40px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 9px; font-size: 18px; font-weight: 800; letter-spacing: -.3px; margin-bottom: 8px; }
+    .footer-tagline { font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 220px; margin-bottom: 12px; }
+    .footer-copy    { font-size: 12px; color: var(--muted); }
+    .footer-col h4  { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 14px; }
+    .footer-col a   { display: block; font-size: 14px; color: var(--muted); margin-bottom: 9px; transition: color .15s; }
+    .footer-col a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+      .feat-cell:nth-child(3n) { border-right: 1px solid var(--border); }
+      .feat-cell:nth-child(2n) { border-right: none; }
+      .spotlight-row { grid-template-columns: 1fr; gap: 32px; }
+      .spotlight-row.flip { direction: ltr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .price-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+      footer { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .phones-section { flex-direction: column; align-items: center; gap: 48px; }
+      .steps { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .feat-cell { border-right: none !important; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      footer { grid-template-columns: 1fr; }
+      .ig-card { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg width="26" height="26" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(90,200,250,0.2)" stroke-width="18"/>
+      <circle cx="50" cy="50" r="36" fill="none" stroke="#5AC8FA" stroke-width="18" stroke-linecap="round" stroke-dasharray="170 56" transform="rotate(-90 50 50)"/>
+    </svg>
+    Daily
+  </div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="nav-appstore">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Coming Soon to the App Store
+</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Coming soon to the App Store
+  </div>
+  <h1>Build habits<br>that <em>actually stick.</em></h1>
+  <p>Daily is the simple, focused app for tracking habits, tasks, and goals. One check-in a day. Real progress over time.</p>
+  <div class="hero-cta-wrap">
+    <a href="#" class="appstore-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Coming Soon to the App Store
+    </a>
+    <p class="hero-note"><strong>Coming soon</strong> · Pro features available</p>
+  </div>
+</section>
+
+<!-- PHONE MOCKUPS -->
+<section class="phones-section">
+
+  <!-- Today -->
+  <div class="phone-wrap" style="margin-top:20px">
+    <div class="phone-glow"></div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="scr-title">Today</div>
+        <div class="scr-date">Tuesday, 24 June</div>
+        <div class="scr-shdr">Habits</div>
+        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Morning run</div><div class="h-streak">14d</div></div>
+        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Read 20 mins</div><div class="h-streak">7d</div></div>
+        <div class="habit-row"><div class="h-circle"></div><div class="h-name">Meditate</div><div class="h-streak" style="color:var(--muted)">3d</div></div>
+        <div class="habit-row" style="border:none"><div class="h-circle"></div><div class="h-name">No sugar</div><div class="h-streak" style="color:var(--muted)">2d</div></div>
+        <div class="scr-shdr">Tasks due</div>
+        <div class="task-row"><div class="t-sq done"></div><div class="t-name done">Review weekly goals</div></div>
+        <div class="task-row" style="border:none"><div class="t-sq"></div><div class="t-name">Send project update</div></div>
+        <div class="stat-pill">
+          <div><div class="pill-num">2<span style="font-size:14px;color:var(--muted);font-weight:500">/4</span></div><div class="pill-lbl">habits done</div></div>
+          <div style="text-align:right"><div class="pill-num">14</div><div class="pill-lbl">day streak</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Today</div>
+  </div>
+
+  <!-- Habits — large/center -->
+  <div class="phone-wrap">
+    <div class="phone-glow"></div>
+    <div class="phone large">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="scr-title">Habits</div>
+        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Morning run</div><div class="h-streak">🔥 14</div></div>
+        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Drink 2L water</div><div class="h-streak">🔥 21</div></div>
+        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Read 20 mins</div><div class="h-streak">🔥 7</div></div>
+        <div class="habit-row"><div class="h-circle"></div><div class="h-name">Meditate</div><div class="h-streak" style="color:var(--muted)">🔥 3</div></div>
+        <div class="habit-row" style="border:none"><div class="h-circle"></div><div class="h-name">No sugar</div><div class="h-streak" style="color:var(--muted)">🔥 2</div></div>
+        <div style="background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-top:14px">
+          <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Best streak this week</div>
+          <div style="font-size:28px;font-weight:900;color:var(--accent);letter-spacing:-1px;line-height:1">21</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px">days — Drink 2L water</div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Habits</div>
+  </div>
+
+  <!-- Goals -->
+  <div class="phone-wrap" style="margin-top:40px">
+    <div class="phone-glow"></div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="scr-title">Goals</div>
+        <div class="goal-row">
+          <div class="g-ring-wrap">
+            <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" fill="none" stroke="var(--border)" stroke-width="7"/><circle cx="22" cy="22" r="17" fill="none" stroke="#5AC8FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="80 27" transform="rotate(-90 22 22)"/></svg>
+          </div>
+          <div><div class="g-name">Run a 5K</div><div class="g-pct">75% complete</div></div>
+        </div>
+        <div class="goal-row">
+          <div class="g-ring-wrap">
+            <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" fill="none" stroke="var(--border)" stroke-width="7"/><circle cx="22" cy="22" r="17" fill="none" stroke="#5AC8FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="53 54" transform="rotate(-90 22 22)"/></svg>
+          </div>
+          <div><div class="g-name">Read 12 books</div><div class="g-pct">50% — 6 of 12</div></div>
+        </div>
+        <div class="goal-row" style="margin-bottom:0">
+          <div class="g-ring-wrap">
+            <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" fill="none" stroke="var(--border)" stroke-width="7"/><circle cx="22" cy="22" r="17" fill="none" stroke="#5AC8FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="21 86" transform="rotate(-90 22 22)"/></svg>
+          </div>
+          <div><div class="g-name">Save R10,000</div><div class="g-pct">20% — R2,000</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-label">Goals</div>
+  </div>
+
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <p class="sec-label">How it works</p>
+  <h2 class="sec-title">Up and running<br><em>in 60 seconds.</em></h2>
+  <p class="sec-sub">No complicated setup. No syncing. Just open the app and start showing up.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Add your habits</h3>
+      <p>Pick what you want to track — daily, weekly, monthly, or one-off. Set it once and Daily takes care of the rest.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Check in every day</h3>
+      <p>Open the Today tab, tick off what you've done. One tap per habit. Your streak grows automatically.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Watch it add up</h3>
+      <p>Streaks, calendar views, goal rings, and progress charts — see exactly how consistent you've been.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES GRID -->
+<section class="features" id="features">
+  <p class="sec-label">Features</p>
+  <h2 class="sec-title">Everything you need.<br><em>Nothing you don't.</em></h2>
+  <p class="sec-sub">Five tabs. One daily check-in. A full picture of how consistent you really are.</p>
+  <div class="feat-grid">
+    <div class="feat-cell">
+      <div class="feat-icon">🔥</div>
+      <h3>Habit streaks</h3>
+      <p>Every habit tracks its own streak. Watch the numbers climb and feel the pull of not wanting to break the chain.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon">✅</div>
+      <h3>Today view</h3>
+      <p>One screen shows everything due today — habits and tasks together. No hunting around. Just open and tick.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon">📋</div>
+      <h3>Tasks</h3>
+      <p>Weekly, every-2-weeks, monthly, or one-off tasks. Set them once and they appear automatically when they're due.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon">🎯</div>
+      <h3>Goal tracking</h3>
+      <p>Set goals with a target and deadline. A progress ring shows you exactly how far along you are at a glance.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon">📅</div>
+      <h3>Calendar view</h3>
+      <p>Your full habit history on a monthly calendar. Every dot is a day you showed up. The visual pattern is addictive.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon">📊</div>
+      <h3>Progress dashboard</h3>
+      <p>Streak count, weekly completion rate, and bar charts. Real numbers that show the real you over time.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon">🌙</div>
+      <h3>Dark &amp; light mode</h3>
+      <p>Fully themed with multiple accent colour options. Make Daily look exactly how you want it to look.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon">🔔</div>
+      <h3>Daily reminders</h3>
+      <p>Set a custom reminder time and Daily nudges you when it's time to check in. Never miss a day by accident.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon">🔒</div>
+      <h3>Private by default</h3>
+      <p>Your data lives in your account — no social feed, no sharing unless you choose to. This is your space.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE SPOTLIGHTS -->
+<section class="spotlight">
+
+  <div class="spotlight-row">
+    <div class="spot-text">
+      <div class="spot-tag">Streaks</div>
+      <h2>Don't break<br><em>the chain.</em></h2>
+      <p>Streaks are the simplest, most powerful motivator there is. Daily tracks a streak for every habit — you always know exactly how many days in a row you've shown up.</p>
+      <ul class="spot-bullets">
+        <li><strong>Per-habit streaks</strong> — every habit has its own count</li>
+        <li><strong>Best streak history</strong> — see your longest run ever</li>
+        <li><strong>Today view</strong> — see all streaks at once in the morning</li>
+        <li><strong>Reminder nudge</strong> — get alerted before your streak is at risk</li>
+        <li><strong>Visual dot calendar</strong> — see the full chain at a glance</li>
+      </ul>
+    </div>
+    <div class="spot-visual">
+      <div class="streak-vis">
+        <div class="streak-big">18</div>
+        <div class="streak-unit">day streak</div>
+        <div class="dot-grid">
+          <div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div>
+          <div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div>
+          <div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div><div class="spot-dot on"></div>
+          <div class="spot-dot off"></div><div class="spot-dot off"></div><div class="spot-dot off"></div>
+        </div>
+        <div class="streak-stat-row">
+          <div class="streak-stat"><div class="val">5</div><div class="lbl">habits tracked</div></div>
+          <div class="streak-stat"><div class="val">87%</div><div class="lbl">completion this week</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spotlight-row flip">
+    <div class="spot-text">
+      <div class="spot-tag">Goals</div>
+      <h2>Set it.<br><em>Track it. Hit it.</em></h2>
+      <p>Goals in Daily are more than just words you write down. Each goal has a progress ring, a target, and a deadline — so you always know exactly where you stand and how much further you have to go.</p>
+      <ul class="spot-bullets">
+        <li><strong>Visual progress rings</strong> — see completion at a glance</li>
+        <li><strong>Custom targets</strong> — numeric goals with milestones</li>
+        <li><strong>Multiple active goals</strong> — track everything in parallel</li>
+        <li><strong>Manual progress updates</strong> — update whenever you hit a milestone</li>
+        <li><strong>Goal completion</strong> — mark done and celebrate the win</li>
+      </ul>
+    </div>
+    <div class="spot-visual">
+      <div class="goal-vis">
+        <div class="goal-item">
+          <div class="goal-head">
+            <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="14" fill="none" stroke="var(--border)" stroke-width="6"/><circle cx="18" cy="18" r="14" fill="none" stroke="#5AC8FA" stroke-width="6" stroke-linecap="round" stroke-dasharray="66 22" transform="rotate(-90 18 18)"/></svg>
+            <div class="goal-name-big">Run a 5K</div><div class="goal-pct-big">75%</div>
+          </div>
+          <div class="goal-track"><div class="goal-fill" style="width:75%"></div></div>
+          <div class="goal-sub">Target: end of July · 3 weeks left</div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-head">
+            <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="14" fill="none" stroke="var(--border)" stroke-width="6"/><circle cx="18" cy="18" r="14" fill="none" stroke="#5AC8FA" stroke-width="6" stroke-linecap="round" stroke-dasharray="44 44" transform="rotate(-90 18 18)"/></svg>
+            <div class="goal-name-big">Read 12 books</div><div class="goal-pct-big">50%</div>
+          </div>
+          <div class="goal-track"><div class="goal-fill" style="width:50%"></div></div>
+          <div class="goal-sub">6 of 12 done</div>
+        </div>
+        <div class="goal-item" style="margin-bottom:0">
+          <div class="goal-head">
+            <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="14" fill="none" stroke="var(--border)" stroke-width="6"/><circle cx="18" cy="18" r="14" fill="none" stroke="#5AC8FA" stroke-width="6" stroke-linecap="round" stroke-dasharray="18 70" transform="rotate(-90 18 18)"/></svg>
+            <div class="goal-name-big">Save R10,000</div><div class="goal-pct-big">20%</div>
+          </div>
+          <div class="goal-track"><div class="goal-fill" style="width:20%"></div></div>
+          <div class="goal-sub">R2,000 of R10,000 saved</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div><div class="stat-val">5</div><div class="stat-label">tabs covering habits,<br>tasks, goals &amp; progress</div></div>
+    <div><div class="stat-val">∞</div><div class="stat-label">habits and goals<br>you can track</div></div>
+    <div><div class="stat-val">Free</div><div class="stat-label">to download on<br>the App Store</div></div>
+    <div><div class="stat-val">iOS</div><div class="stat-label">Available now<br>on the App Store</div></div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <p class="sec-label">Pricing</p>
+  <h2 class="sec-title">Start free.<br><em>Upgrade when ready.</em></h2>
+  <p class="sec-sub">Daily is free to download and use. Unlock advanced features with Pro.</p>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-name">Free</div>
+      <div class="price-amount">$0</div>
+      <div class="price-period">always free</div>
+      <ul class="price-feats">
+        <li>Up to 3 habits</li>
+        <li>Today &amp; Habits tabs</li>
+        <li>Basic streak tracking</li>
+        <li>Daily reminders</li>
+        <li class="dim">Unlimited habits</li>
+        <li class="dim">Tasks tab</li>
+        <li class="dim">Goals tab</li>
+        <li class="dim">Calendar view</li>
+        <li class="dim">Progress dashboard</li>
+      </ul>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">Pro</div>
+      <div class="price-name">Daily Pro</div>
+      <div class="price-amount"><span>$</span>2.99</div>
+      <div class="price-period">per month · or $19.99/year</div>
+      <ul class="price-feats">
+        <li>Everything in Free</li>
+        <li>Unlimited habits</li>
+        <li>Tasks — weekly, monthly &amp; one-off</li>
+        <li>Goals with progress rings</li>
+        <li>Full calendar view</li>
+        <li>Progress dashboard &amp; charts</li>
+        <li>Multiple theme colours</li>
+        <li>Priority support</li>
+      </ul>
+    </div>
+  </div>
+  <p class="pricing-note">Cancel any time from the App Store. <strong>No questions asked.</strong></p>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <p class="sec-label">FAQ</p>
+  <h2 class="sec-title">Common<br><em>questions.</em></h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">Is Daily really free? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Yes. Daily is free to download and includes habit tracking for up to 3 habits, streaks, and daily reminders. Pro unlocks unlimited habits, tasks, goals, calendar, and the progress dashboard.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">What's included in Daily Pro? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Pro gives you unlimited habits, the full Tasks tab (weekly, bi-weekly, monthly, one-off), the Goals tab with progress rings, the Calendar view, and the Progress dashboard with charts. It also unlocks all theme colour options.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">Is Daily available on Android? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Daily is currently iOS only. Android support may come in a future update.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">How do reminders work? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">You can set a daily reminder at a time of your choosing. Daily will send a push notification each day to remind you to check in. You can enable, disable, or change the time at any point from inside the app.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">What's the difference between habits and tasks? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Habits are things you want to do every day — they build streaks and show up on your calendar. Tasks are things that recur on a schedule (weekly, monthly, etc.) or happen once — like "pay rent" or "send the report". Both appear in your Today view when they're due.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">Can I cancel my subscription? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Yes, cancel any time through the App Store → Subscriptions. Your Pro access continues until the end of the billing period. Your data and habits are safe even if you downgrade to Free.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">How do I delete my account? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Go to your profile (top right) → scroll down → Delete Account. This permanently deletes all your data and cannot be undone.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="hero-glow"></div>
+  <h2>Start showing up.<br><em>Every day.</em></h2>
+  <p>Download Daily for free and build your first habit today. It takes 60 seconds to get started.</p>
+  <div style="position:relative;z-index:1">
+    <a href="#" class="appstore-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Coming Soon to the App Store
+    </a>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="ig-section">
+  <div class="ig-card">
+    <div class="ig-glow"></div>
+    <div class="ig-icon">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="white" stroke="none"/></svg>
+    </div>
+    <h2>Follow the journey<br>on <em>Instagram</em></h2>
+    <p>Habit tips, behind-the-scenes updates, new features, and a community of people building better routines. Follow along and be part of it.</p>
+    <a href="https://instagram.com" target="_blank" class="ig-follow-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      Follow on Instagram
+    </a>
+    <div class="ig-handle">@daily.app</div>
+    <div class="ig-posts">
+      <div class="ig-chip">🔥 Habit tips</div>
+      <div class="ig-chip">📊 App updates</div>
+      <div class="ig-chip">✅ Consistency wins</div>
+      <div class="ig-chip">🎯 Goal-setting</div>
+      <div class="ig-chip">💡 Building routines</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">
+      <svg width="22" height="22" viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="none" stroke="rgba(90,200,250,0.2)" stroke-width="18"/><circle cx="50" cy="50" r="36" fill="none" stroke="#5AC8FA" stroke-width="18" stroke-linecap="round" stroke-dasharray="170 56" transform="rotate(-90 50 50)"/></svg>
+      Daily
+    </div>
+    <div class="footer-tagline">The simple habit tracker for people who want to show up every day.</div>
+    <div class="footer-copy">© 2026 Daily · All rights reserved</div>
+  </div>
+  <div class="footer-col">
+    <h4>Product</h4>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <div class="footer-col">
+    <h4>Info</h4>
+    <a href="#how">How it works</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <div class="footer-col">
+    <h4>Legal</h4>
+    <a href="https://dewet2808.github.io/daily-privacy-policy" target="_blank">Privacy policy</a>
+  </div>
+</footer>
+
+<script>
+  function toggle(btn) {
+    const item = btn.closest('.faq-item')
+    const wasOpen = item.classList.contains('open')
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'))
+    if (!wasOpen) item.classList.add('open')
+  }
+</script>
+
+</body>
+</html>
