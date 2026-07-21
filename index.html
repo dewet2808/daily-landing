@@ -140,15 +140,11 @@
       background: radial-gradient(circle, rgba(90,200,250,0.1) 0%, transparent 65%);
       top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
     }
-    .phone {
-      background: var(--card); border-radius: 40px;
-      border: 1.5px solid var(--border); padding: 14px;
-      box-shadow: 0 0 0 5px #0A0E1A, 0 0 0 6.5px #1C2840, 0 32px 80px rgba(0,0,0,.7);
-      width: 220px; position: relative; z-index: 1;
+    .phone-screenshot {
+      width: 220px; display: block; position: relative; z-index: 1;
+      filter: drop-shadow(0 24px 60px rgba(0,0,0,.7));
     }
-    .phone.large { width: 255px; }
-    .notch { width: 64px; height: 18px; background: #080C18; border-radius: 0 0 12px 12px; margin: 0 auto 10px; }
-    .screen { background: var(--bg); border-radius: 26px; padding: 14px; min-height: 370px; }
+    .phone-screenshot.large { width: 255px; }
 
     /* Screen UI */
     .scr-title { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 14px; }
@@ -455,78 +451,22 @@
   <!-- Today -->
   <div class="phone-wrap" style="margin-top:20px">
     <div class="phone-glow"></div>
-    <div class="phone">
-      <div class="notch"></div>
-      <div class="screen">
-        <div class="scr-title">Today</div>
-        <div class="scr-date">Tuesday, 24 June</div>
-        <div class="scr-shdr">Habits</div>
-        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Morning run</div><div class="h-streak">14d</div></div>
-        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Read 20 mins</div><div class="h-streak">7d</div></div>
-        <div class="habit-row"><div class="h-circle"></div><div class="h-name">Meditate</div><div class="h-streak" style="color:var(--muted)">3d</div></div>
-        <div class="habit-row" style="border:none"><div class="h-circle"></div><div class="h-name">No sugar</div><div class="h-streak" style="color:var(--muted)">2d</div></div>
-        <div class="scr-shdr">Tasks due</div>
-        <div class="task-row"><div class="t-sq done"></div><div class="t-name done">Review weekly goals</div></div>
-        <div class="task-row" style="border:none"><div class="t-sq"></div><div class="t-name">Send project update</div></div>
-        <div class="stat-pill">
-          <div><div class="pill-num">2<span style="font-size:14px;color:var(--muted);font-weight:500">/4</span></div><div class="pill-lbl">habits done</div></div>
-          <div style="text-align:right"><div class="pill-num">14</div><div class="pill-lbl">day streak</div></div>
-        </div>
-      </div>
-    </div>
+    <img src="images/screen-today.jpg" class="phone-screenshot" alt="Daily – Today view" />
     <div class="phone-label">Today</div>
   </div>
 
   <!-- Habits — large/center -->
   <div class="phone-wrap">
     <div class="phone-glow"></div>
-    <div class="phone large">
-      <div class="notch"></div>
-      <div class="screen">
-        <div class="scr-title">Habits</div>
-        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Morning run</div><div class="h-streak">🔥 14</div></div>
-        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Drink 2L water</div><div class="h-streak">🔥 21</div></div>
-        <div class="habit-row"><div class="h-circle done"></div><div class="h-name done">Read 20 mins</div><div class="h-streak">🔥 7</div></div>
-        <div class="habit-row"><div class="h-circle"></div><div class="h-name">Meditate</div><div class="h-streak" style="color:var(--muted)">🔥 3</div></div>
-        <div class="habit-row" style="border:none"><div class="h-circle"></div><div class="h-name">No sugar</div><div class="h-streak" style="color:var(--muted)">🔥 2</div></div>
-        <div style="background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-top:14px">
-          <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Best streak this week</div>
-          <div style="font-size:28px;font-weight:900;color:var(--accent);letter-spacing:-1px;line-height:1">21</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:3px">days — Drink 2L water</div>
-        </div>
-      </div>
-    </div>
+    <img src="images/screen-habits.jpg" class="phone-screenshot large" alt="Daily – Habits view" />
     <div class="phone-label">Habits</div>
   </div>
 
-  <!-- Goals -->
+  <!-- Progress -->
   <div class="phone-wrap" style="margin-top:40px">
     <div class="phone-glow"></div>
-    <div class="phone">
-      <div class="notch"></div>
-      <div class="screen">
-        <div class="scr-title">Goals</div>
-        <div class="goal-row">
-          <div class="g-ring-wrap">
-            <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" fill="none" stroke="var(--border)" stroke-width="7"/><circle cx="22" cy="22" r="17" fill="none" stroke="#5AC8FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="80 27" transform="rotate(-90 22 22)"/></svg>
-          </div>
-          <div><div class="g-name">Run a 5K</div><div class="g-pct">75% complete</div></div>
-        </div>
-        <div class="goal-row">
-          <div class="g-ring-wrap">
-            <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" fill="none" stroke="var(--border)" stroke-width="7"/><circle cx="22" cy="22" r="17" fill="none" stroke="#5AC8FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="53 54" transform="rotate(-90 22 22)"/></svg>
-          </div>
-          <div><div class="g-name">Read 12 books</div><div class="g-pct">50% — 6 of 12</div></div>
-        </div>
-        <div class="goal-row" style="margin-bottom:0">
-          <div class="g-ring-wrap">
-            <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" fill="none" stroke="var(--border)" stroke-width="7"/><circle cx="22" cy="22" r="17" fill="none" stroke="#5AC8FA" stroke-width="7" stroke-linecap="round" stroke-dasharray="21 86" transform="rotate(-90 22 22)"/></svg>
-          </div>
-          <div><div class="g-name">Save R10,000</div><div class="g-pct">20% — R2,000</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="phone-label">Goals</div>
+    <img src="images/screen-progress.jpg" class="phone-screenshot" alt="Daily – Progress view" />
+    <div class="phone-label">Progress</div>
   </div>
 
 </section>
