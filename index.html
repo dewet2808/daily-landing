@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily — Build habits that actually stick</title>
-  <meta name="description" content="Track your habits, tasks, and goals every day. Daily is the simple, focused app that turns consistency into progress. Free on the App Store." />
+  <meta name="description" content="Daily is the intelligent habit tracker that learns your patterns, shows what your routines compound to over a year, and keeps you accountable. Free on the App Store." />
   <meta property="og:title" content="Daily — Build habits that actually stick" />
-  <meta property="og:description" content="One app for habits, tasks, goals, and progress. Built for people who want to show up every day." />
+  <meta property="og:description" content="Track habits, tasks and goals. Get Smart Insights that spot your patterns automatically. See the Compound Effect of your daily actions." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +25,8 @@
       --text:   #EFF6FF;
       --muted:  #4E6A88;
       --green:  #34D399;
+      --yellow: #F59E0B;
+      --purple: #A78BFA;
     }
 
     html { scroll-behavior: smooth; }
@@ -47,132 +49,38 @@
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(90,200,250,0.08);
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 19px; font-weight: 800; letter-spacing: -0.4px;
-    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: -0.4px; }
     .nav-logo svg { flex-shrink: 0; }
     .nav-links { display: flex; align-items: center; gap: 2px; }
-    .nav-links a {
-      font-size: 14px; font-weight: 500; color: var(--muted);
-      padding: 7px 13px; border-radius: 8px;
-      transition: color 0.15s, background 0.15s;
-    }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); padding: 7px 13px; border-radius: 8px; transition: color .15s, background .15s; }
     .nav-links a:hover { color: var(--text); background: rgba(90,200,250,0.06); }
     .nav-right { display: flex; align-items: center; gap: 10px; }
-    .nav-appstore {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--accent); color: #0C1020;
-      font-size: 13px; font-weight: 700;
-      padding: 9px 18px; border-radius: 10px;
-      transition: opacity 0.15s;
-    }
-    .nav-appstore:hover { opacity: 0.85; }
+    .nav-appstore { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0C1020; font-size: 13px; font-weight: 700; padding: 9px 18px; border-radius: 10px; transition: opacity .15s; }
+    .nav-appstore:hover { opacity: .85; }
 
     /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 140px 24px 80px;
-      position: relative; overflow: hidden;
-    }
-    .hero-glow {
-      position: absolute;
-      width: 900px; height: 900px;
-      background: radial-gradient(circle, rgba(90,200,250,0.12) 0%, transparent 60%);
-      top: 40%; left: 50%; transform: translate(-50%,-50%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.22);
-      border-radius: 100px; padding: 8px 18px;
-      font-size: 13px; font-weight: 600; color: var(--acc2);
-      margin-bottom: 28px; position: relative; z-index: 1;
-    }
-    .badge-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
-      animation: pulse 2s infinite;
-    }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 24px 80px; position: relative; overflow: hidden; }
+    .hero-glow { position: absolute; width: 900px; height: 900px; background: radial-gradient(circle, rgba(90,200,250,0.12) 0%, transparent 60%); top: 40%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.22); border-radius: 100px; padding: 8px 18px; font-size: 13px; font-weight: 600; color: var(--acc2); margin-bottom: 28px; position: relative; z-index: 1; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
-
-    .hero h1 {
-      font-size: clamp(52px, 8vw, 100px);
-      font-weight: 900; line-height: 0.92; letter-spacing: -4px;
-      color: var(--text); margin-bottom: 24px;
-      position: relative; z-index: 1; max-width: 860px;
-    }
+    .hero h1 { font-size: clamp(52px, 8vw, 100px); font-weight: 900; line-height: 0.92; letter-spacing: -4px; color: var(--text); margin-bottom: 24px; position: relative; z-index: 1; max-width: 860px; }
     .hero h1 em { color: var(--accent); font-style: normal; }
-    .hero > p {
-      font-size: clamp(17px, 2.2vw, 21px); color: var(--muted);
-      line-height: 1.65; max-width: 500px; margin-bottom: 44px;
-      position: relative; z-index: 1;
-    }
+    .hero > p { font-size: clamp(17px, 2.2vw, 21px); color: var(--muted); line-height: 1.65; max-width: 540px; margin-bottom: 44px; position: relative; z-index: 1; }
     .hero-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; position: relative; z-index: 1; }
-    .appstore-btn {
-      display: inline-flex; align-items: center; gap: 12px;
-      background: var(--accent); color: #080C18;
-      font-size: 16px; font-weight: 700; font-family: inherit;
-      padding: 16px 32px; border-radius: 14px; border: none;
-      transition: opacity .15s, transform .1s; text-decoration: none;
-    }
-    .appstore-btn:hover  { opacity: 0.9; }
-    .appstore-btn:active { transform: scale(0.97); }
+    .appstore-btn { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: #080C18; font-size: 16px; font-weight: 700; font-family: inherit; padding: 16px 32px; border-radius: 14px; border: none; transition: opacity .15s, transform .1s; text-decoration: none; }
+    .appstore-btn:hover  { opacity: .9; }
+    .appstore-btn:active { transform: scale(.97); }
     .hero-note { font-size: 13px; color: var(--muted); }
     .hero-note strong { color: var(--text); }
 
     /* ── PHONE STRIP ── */
-    .phones-section {
-      padding: 0 24px 120px;
-      display: flex; justify-content: center;
-      gap: 28px; align-items: flex-start; flex-wrap: wrap;
-    }
+    .phones-section { padding: 0 24px 120px; display: flex; justify-content: center; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
     .phone-wrap { position: relative; flex-shrink: 0; }
-    .phone-label {
-      text-align: center; font-size: 12px; font-weight: 700;
-      color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em;
-      margin-top: 16px;
-    }
-    .phone-glow {
-      position: absolute; width: 360px; height: 360px;
-      background: radial-gradient(circle, rgba(90,200,250,0.1) 0%, transparent 65%);
-      top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
-    }
-    .phone-screenshot {
-      width: 220px; display: block; position: relative; z-index: 1;
-      filter: drop-shadow(0 24px 60px rgba(0,0,0,.7));
-    }
+    .phone-label { text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-top: 16px; }
+    .phone-glow { position: absolute; width: 360px; height: 360px; background: radial-gradient(circle, rgba(90,200,250,0.1) 0%, transparent 65%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .phone-screenshot { width: 220px; display: block; position: relative; z-index: 1; filter: drop-shadow(0 24px 60px rgba(0,0,0,.7)); }
     .phone-screenshot.large { width: 255px; }
-
-    /* Screen UI */
-    .scr-title { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 14px; }
-    .scr-date  { font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 12px; margin-top: -8px; }
-    .scr-shdr  { font-size: 9px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin: 10px 0 7px; }
-    .habit-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border); }
-    .h-circle  { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--accent); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-    .h-circle.done { background: var(--accent); border-color: var(--accent); }
-    .h-circle.done::after { content:''; display:block; width:5px; height:3px; border-left:2px solid #080C18; border-bottom:2px solid #080C18; transform:rotate(-45deg) translate(0,-1px); }
-    .h-name   { font-size: 11px; color: var(--text); flex: 1; font-weight: 500; }
-    .h-name.done { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--border); }
-    .h-streak { font-size: 10px; color: var(--accent); font-weight: 600; }
-    .task-row  { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border); }
-    .t-sq      { width: 14px; height: 14px; border-radius: 4px; border: 2px solid var(--accent); flex-shrink: 0; }
-    .t-sq.done { background: var(--accent); }
-    .t-name   { font-size: 11px; color: var(--text); font-weight: 500; }
-    .t-name.done { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--border); }
-    .stat-pill { display: flex; justify-content: space-between; align-items: center; background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-top: 12px; }
-    .pill-num  { font-size: 22px; font-weight: 900; color: var(--accent); letter-spacing: -1px; }
-    .pill-lbl  { font-size: 9px; color: var(--muted); }
-    .goal-row  { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-    .g-ring-wrap { flex-shrink: 0; }
-    .g-name  { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-    .g-pct   { font-size: 10px; color: var(--accent); }
-    .prog-bar-row { margin-bottom: 4px; }
-    .prog-bar-label { display: flex; justify-content: space-between; font-size: 9px; margin-bottom: 3px; color: var(--muted); }
-    .prog-bar-track { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
-    .prog-bar-fill  { height: 100%; border-radius: 99px; background: var(--accent); }
 
     /* ── SECTION HEADERS ── */
     .sec-label { text-align: center; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: 12px; }
@@ -184,62 +92,75 @@
     .how { padding: 100px 24px; max-width: 960px; margin: 0 auto; }
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 56px; }
     .step { text-align: center; }
-    .step-num {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.22);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; font-weight: 900; color: var(--accent);
-      margin: 0 auto 18px;
-    }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.22); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: var(--accent); margin: 0 auto 18px; }
     .step h3 { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
     .step p  { font-size: 15px; color: var(--muted); line-height: 1.65; }
 
     /* ── FEATURES GRID ── */
     .features { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
-    .feat-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-      margin-top: 56px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
-    }
-    .feat-cell {
-      background: var(--card); padding: 32px 28px;
-      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      transition: background .2s;
-    }
+    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .feat-cell { background: var(--card); padding: 32px 28px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: background .2s; }
     .feat-cell:hover { background: var(--card2); }
     .feat-cell:nth-child(3n)    { border-right: none; }
     .feat-cell:nth-last-child(-n+3) { border-bottom: none; }
+    .feat-cell.highlight { background: linear-gradient(160deg, rgba(90,200,250,0.06) 0%, var(--card) 70%); }
+    .feat-cell.highlight:hover { background: linear-gradient(160deg, rgba(90,200,250,0.10) 0%, var(--card2) 70%); }
     .feat-icon { width: 36px; height: 36px; margin-bottom: 16px; color: var(--accent); }
+    .feat-icon.purple { color: var(--purple); }
+    .feat-icon.green  { color: var(--green); }
+    .feat-new { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; background: rgba(90,200,250,0.12); color: var(--accent); border-radius: 4px; padding: 2px 6px; margin-bottom: 10px; }
     .feat-cell h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .feat-cell p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
     /* ── SPOTLIGHTS ── */
     .spotlight { padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
-    .spotlight-row {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-      align-items: center; padding: 60px 0; border-bottom: 1px solid var(--border);
-    }
+    .spotlight-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 60px 0; border-bottom: 1px solid var(--border); }
     .spotlight-row:last-child { border-bottom: none; }
     .spotlight-row.flip { direction: rtl; }
     .spotlight-row.flip > * { direction: ltr; }
-    .spot-tag {
-      display: inline-block; font-size: 12px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .08em; color: var(--accent);
-      background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.2);
-      border-radius: 6px; padding: 4px 10px; margin-bottom: 16px;
-    }
+    .spot-tag { display: inline-block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); background: rgba(90,200,250,0.08); border: 1px solid rgba(90,200,250,0.2); border-radius: 6px; padding: 4px 10px; margin-bottom: 16px; }
+    .spot-tag.purple { color: var(--purple); background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.2); }
+    .spot-tag.green  { color: var(--green);  background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.2); }
     .spot-text h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 16px; }
     .spot-text h2 em { color: var(--accent); font-style: normal; }
+    .spot-text h2 em.purple { color: var(--purple); }
+    .spot-text h2 em.green  { color: var(--green); }
     .spot-text p  { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
     .spot-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .spot-bullets li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--muted); line-height: 1.5; }
     .spot-bullets li::before { content: '✓'; color: var(--green); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
     .spot-bullets li strong { color: var(--text); }
-    .spot-visual {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 20px; padding: 28px; display: flex; justify-content: center;
-    }
+    .spot-visual { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; display: flex; justify-content: center; }
 
-    /* Spotlight visual elements */
+    /* Smart Insights visual */
+    .insight-vis { width: 100%; display: flex; flex-direction: column; gap: 2px; }
+    .iv-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-radius: 12px; }
+    .iv-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .iv-positive .iv-icon { background: rgba(90,200,250,0.12); color: var(--accent); }
+    .iv-warning  .iv-icon { background: rgba(245,158,11,0.12);  color: var(--yellow); }
+    .iv-coaching .iv-icon { background: rgba(167,139,250,0.12); color: var(--purple); }
+    .iv-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .iv-sub   { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+    /* Compound Effect visual */
+    .compound-vis { width: 100%; display: flex; flex-direction: column; gap: 0; }
+    .cv-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .cv-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cv-item:first-child { padding-top: 0; }
+    .cv-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .cv-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .cv-pill { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 20px; }
+    .cv-ontk { background: rgba(90,200,250,0.12); color: var(--accent); }
+    .cv-ahead { background: rgba(52,211,153,0.12); color: var(--green); }
+    .cv-pace { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .cv-pace strong { color: var(--accent); font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+    .cv-bar-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .cv-bar { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .cv-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--acc2)); border-radius: 3px; }
+    .cv-done { font-size: 11px; color: var(--muted); font-weight: 600; flex-shrink: 0; }
+    .cv-fact { font-size: 11px; color: var(--muted); font-style: italic; }
+
+    /* Streak visual */
     .streak-vis { width: 100%; }
     .streak-big { font-size: 72px; font-weight: 900; color: var(--accent); letter-spacing: -3px; line-height: 1; }
     .streak-unit { font-size: 20px; color: var(--muted); font-weight: 500; margin-bottom: 24px; }
@@ -252,6 +173,7 @@
     .streak-stat .val { font-size: 28px; font-weight: 800; color: var(--text); letter-spacing: -1px; }
     .streak-stat .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
+    /* Goal visual */
     .goal-vis { width: 100%; }
     .goal-item { margin-bottom: 20px; }
     .goal-head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
@@ -270,19 +192,9 @@
     /* ── PRICING ── */
     .pricing { padding: 100px 24px; max-width: 760px; margin: 0 auto; }
     .price-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 56px; }
-    .price-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 24px; padding: 36px 32px;
-    }
-    .price-card.featured {
-      border-color: var(--accent);
-      background: linear-gradient(160deg, rgba(90,200,250,0.06) 0%, var(--card) 60%);
-    }
-    .price-badge {
-      display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .06em; color: #080C18; background: var(--accent);
-      border-radius: 6px; padding: 3px 9px; margin-bottom: 18px;
-    }
+    .price-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 36px 32px; }
+    .price-card.featured { border-color: var(--accent); background: linear-gradient(160deg, rgba(90,200,250,0.06) 0%, var(--card) 60%); }
+    .price-badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #080C18; background: var(--accent); border-radius: 6px; padding: 3px 9px; margin-bottom: 18px; }
     .price-name   { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
     .price-amount { font-size: 48px; font-weight: 900; letter-spacing: -2px; line-height: 1; color: var(--text); margin: 16px 0 6px; }
     .price-amount span { font-size: 22px; vertical-align: top; margin-top: 8px; display: inline-block; font-weight: 600; letter-spacing: 0; }
@@ -300,12 +212,7 @@
     .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
     .faq-item { background: var(--card); border-bottom: 1px solid var(--border); }
     .faq-item:last-child { border-bottom: none; }
-    .faq-q {
-      width: 100%; background: none; border: none; color: var(--text); font-family: inherit;
-      font-size: 15px; font-weight: 600; text-align: left;
-      padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;
-      transition: background .15s;
-    }
+    .faq-q { width: 100%; background: none; border: none; color: var(--text); font-family: inherit; font-size: 15px; font-weight: 600; text-align: left; padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: background .15s; }
     .faq-q:hover { background: var(--card2); }
     .faq-arrow { font-size: 18px; color: var(--accent); flex-shrink: 0; transition: transform .2s; }
     .faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; padding: 0 24px 20px; display: none; }
@@ -313,64 +220,29 @@
     .faq-item.open .faq-arrow { transform: rotate(45deg); }
 
     /* ── BOTTOM CTA ── */
-    .bottom-cta {
-      padding: 120px 24px;
-      display: flex; flex-direction: column;
-      align-items: center; text-align: center;
-      position: relative; overflow: hidden;
-    }
+    .bottom-cta { padding: 120px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; }
     .bottom-cta .hero-glow { width: 700px; height: 700px; }
-    .bottom-cta h2 {
-      font-size: clamp(38px, 6vw, 76px); font-weight: 900; letter-spacing: -3px;
-      line-height: .92; margin-bottom: 20px; position: relative; z-index: 1;
-    }
+    .bottom-cta h2 { font-size: clamp(38px, 6vw, 76px); font-weight: 900; letter-spacing: -3px; line-height: .92; margin-bottom: 20px; position: relative; z-index: 1; }
     .bottom-cta h2 em { color: var(--accent); font-style: normal; }
     .bottom-cta p { font-size: 18px; color: var(--muted); line-height: 1.6; max-width: 420px; margin-bottom: 40px; position: relative; z-index: 1; }
 
     /* ── INSTAGRAM ── */
     .ig-section { padding: 0 24px 100px; max-width: 960px; margin: 0 auto; }
-    .ig-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 24px; padding: 56px 40px; text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .ig-glow {
-      position: absolute; width: 600px; height: 400px;
-      background: radial-gradient(ellipse, rgba(90,200,250,0.08) 0%, transparent 65%);
-      top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none;
-    }
-    .ig-icon {
-      width: 64px; height: 64px; border-radius: 18px;
-      background: linear-gradient(135deg, #f97316, #ec4899);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px; position: relative; z-index: 1;
-    }
+    .ig-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 56px 40px; text-align: center; position: relative; overflow: hidden; }
+    .ig-glow { position: absolute; width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(90,200,250,0.08) 0%, transparent 65%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .ig-icon { width: 64px; height: 64px; border-radius: 18px; background: linear-gradient(135deg, #f97316, #ec4899); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; position: relative; z-index: 1; }
     .ig-card h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; position: relative; z-index: 1; }
     .ig-card h2 em { color: var(--accent); font-style: normal; }
     .ig-card p { font-size: 16px; color: var(--muted); line-height: 1.65; max-width: 460px; margin: 0 auto 32px; position: relative; z-index: 1; }
-    .ig-follow-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: linear-gradient(135deg, #f97316, #ec4899);
-      color: #fff; font-size: 16px; font-weight: 700; font-family: inherit;
-      padding: 16px 36px; border-radius: 14px; border: none; cursor: pointer;
-      text-decoration: none; transition: opacity .15s, transform .1s;
-      position: relative; z-index: 1;
-    }
+    .ig-follow-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #f97316, #ec4899); color: #fff; font-size: 16px; font-weight: 700; font-family: inherit; padding: 16px 36px; border-radius: 14px; border: none; cursor: pointer; text-decoration: none; transition: opacity .15s, transform .1s; position: relative; z-index: 1; }
     .ig-follow-btn:hover  { opacity: .9; }
     .ig-follow-btn:active { transform: scale(.97); }
     .ig-handle { font-size: 14px; color: var(--muted); margin-top: 14px; position: relative; z-index: 1; }
     .ig-posts { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 32px; position: relative; z-index: 1; }
-    .ig-chip {
-      background: var(--card2); border: 1px solid var(--border);
-      border-radius: 10px; padding: 8px 14px;
-      font-size: 13px; color: var(--muted); font-weight: 500;
-    }
+    .ig-chip { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; font-size: 13px; color: var(--muted); font-weight: 500; }
 
     /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border); padding: 48px 40px;
-      display: grid; grid-template-columns: 1fr auto auto auto; align-items: start; gap: 40px;
-    }
+    footer { border-top: 1px solid var(--border); padding: 48px 40px; display: grid; grid-template-columns: 1fr auto auto auto; align-items: start; gap: 40px; }
     .footer-logo { display: flex; align-items: center; gap: 9px; font-size: 18px; font-weight: 800; letter-spacing: -.3px; margin-bottom: 8px; }
     .footer-tagline { font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 220px; margin-bottom: 12px; }
     .footer-copy    { font-size: 12px; color: var(--muted); }
@@ -423,7 +295,7 @@
     <a href="https://apps.apple.com/za/app/daily-habit-goal-tracker/id6782181833" class="nav-appstore">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
       Download on the App Store
-</a>
+    </a>
   </div>
 </nav>
 
@@ -432,10 +304,10 @@
   <div class="hero-glow"></div>
   <div class="hero-badge">
     <div class="badge-dot"></div>
-    Now available on the App Store
+    Smart Insights &amp; Compound Effect — just launched
   </div>
   <h1>Build habits<br>that <em>actually stick.</em></h1>
-  <p>Daily is the simple, focused app for tracking habits, tasks, and goals. One check-in a day. Real progress over time.</p>
+  <p>Daily tracks your routines, tasks and goals — then automatically spots your patterns, identifies gaps in your lifestyle, and shows you what your habits compound to over a full year.</p>
   <div class="hero-cta-wrap">
     <a href="https://apps.apple.com/za/app/daily-habit-goal-tracker/id6782181833" class="appstore-btn">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -447,28 +319,21 @@
 
 <!-- PHONE MOCKUPS -->
 <section class="phones-section">
-
-  <!-- Today -->
   <div class="phone-wrap" style="margin-top:20px">
     <div class="phone-glow"></div>
     <img src="images/screen-today.jpg" class="phone-screenshot" alt="Daily – Today view" />
     <div class="phone-label">Today</div>
   </div>
-
-  <!-- Habits — large/center -->
   <div class="phone-wrap">
     <div class="phone-glow"></div>
     <img src="images/screen-habits.jpg" class="phone-screenshot large" alt="Daily – Habits view" />
     <div class="phone-label">Habits</div>
   </div>
-
-  <!-- Progress -->
   <div class="phone-wrap" style="margin-top:40px">
     <div class="phone-glow"></div>
     <img src="images/screen-progress.jpg" class="phone-screenshot" alt="Daily – Progress view" />
     <div class="phone-label">Progress</div>
   </div>
-
 </section>
 
 <!-- HOW IT WORKS -->
@@ -480,17 +345,17 @@
     <div class="step">
       <div class="step-num">1</div>
       <h3>Add your habits</h3>
-      <p>Pick what you want to track — daily, weekly, monthly, or one-off. Set it once and Daily takes care of the rest.</p>
+      <p>Pick what you want to track — daily routines, recurring tasks, or goals with a deadline. Set it once and Daily takes care of the rest.</p>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <h3>Check in every day</h3>
-      <p>Open the Today tab, tick off what you've done. One tap per habit. Your streak grows automatically.</p>
+      <p>Open the Today tab, tick off what you've done. One tap per habit. Your streak grows automatically and your data builds over time.</p>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <h3>Watch it add up</h3>
-      <p>Streaks, calendar views, goal rings, and progress charts — see exactly how consistent you've been.</p>
+      <h3>Let Daily think for you</h3>
+      <p>Smart Insights reads your patterns and tells you what's working, what's slipping, and what's missing — without you having to ask.</p>
     </div>
   </div>
 </section>
@@ -498,60 +363,224 @@
 <!-- FEATURES GRID -->
 <section class="features" id="features">
   <p class="sec-label">Features</p>
-  <h2 class="sec-title">Everything you need.<br><em>Nothing you don't.</em></h2>
-  <p class="sec-sub">Five tabs. One daily check-in. A full picture of how consistent you really are.</p>
+  <h2 class="sec-title">More than a tracker.<br><em>A second brain.</em></h2>
+  <p class="sec-sub">Daily learns from your consistency data and tells you things about yourself that you'd never spot on your own.</p>
   <div class="feat-grid">
+
+    <!-- Row 1: New intelligence features -->
+    <div class="feat-cell highlight">
+      <div class="feat-new">New</div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-5 0v-15A2.5 2.5 0 019.5 2z"/><path d="M14.5 8A2.5 2.5 0 0117 10.5v9a2.5 2.5 0 01-5 0v-9A2.5 2.5 0 0114.5 8z"/><path d="M4.5 13A2.5 2.5 0 017 15.5v4a2.5 2.5 0 01-5 0v-4A2.5 2.5 0 014.5 13z"/></svg>
+      </div>
+      <h3>Smart Insights</h3>
+      <p>Daily analyses your completion data and surfaces what matters — your strongest day of the week, which habit is slipping, gaps in your routine, and momentum streaks. No AI subscription. No prompts. It just tells you.</p>
+    </div>
+    <div class="feat-cell highlight">
+      <div class="feat-new">New</div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h3>The Compound Effect</h3>
+      <p>See what each daily habit becomes at full scale. On pace for 112 runs by Dec 31? Reading 30 min daily = ~7 books a year? Daily does the math and shows you the bigger picture in real terms.</p>
+    </div>
+    <div class="feat-cell highlight">
+      <div class="feat-new">New</div>
+      <div class="feat-icon purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>Accountability Partner</h3>
+      <p>Generate a private 6-character code and share it with one trusted person. They enter it in their own copy of Daily and see your streak, weekly rate, and recent activity. No social feed. No public profile. Just one person who knows.</p>
+    </div>
+
+    <!-- Row 2: Core tracking -->
     <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
       <h3>Habit streaks</h3>
       <p>Every habit tracks its own streak. Watch the numbers climb and feel the pull of not wanting to break the chain.</p>
     </div>
     <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg></div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
+      </div>
       <h3>Today view</h3>
       <p>One screen shows everything due today — habits and tasks together. No hunting around. Just open and tick.</p>
     </div>
     <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      </div>
       <h3>Tasks</h3>
-      <p>Weekly, every-2-weeks, monthly, or one-off tasks. Set them once and they appear automatically when they're due.</p>
+      <p>Weekly, bi-weekly, monthly, or one-off tasks. Set them once and they appear automatically when due.</p>
     </div>
+
+    <!-- Row 3: Goals and progress -->
     <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
       <h3>Goal tracking</h3>
       <p>Set goals with a target and deadline. A progress ring shows you exactly how far along you are at a glance.</p>
     </div>
     <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      </div>
       <h3>Calendar view</h3>
       <p>Your full habit history on a monthly calendar. Every dot is a day you showed up. The visual pattern is addictive.</p>
     </div>
     <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
       <h3>Progress dashboard</h3>
-      <p>Streak count, weekly completion rate, and bar charts. Real numbers that show the real you over time.</p>
+      <p>Weekly completion rate, bar charts, routine breakdown, and all-time stats. Real numbers that show the real you.</p>
     </div>
+
+    <!-- Row 4: Extras -->
     <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
-      <h3>Dark &amp; light mode</h3>
-      <p>Fully themed with multiple accent colour options. Make Daily look exactly how you want it to look.</p>
-    </div>
-    <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      </div>
       <h3>Daily reminders</h3>
       <p>Set a custom reminder time and Daily nudges you when it's time to check in. Never miss a day by accident.</p>
     </div>
     <div class="feat-cell">
-      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </div>
       <h3>To-Do List</h3>
       <p>A simple drag-to-reorder, swipe-to-delete to-do list. Add one-off tasks, check them off, and clear your head.</p>
     </div>
+    <div class="feat-cell">
+      <div class="feat-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <h3>7-Day Challenge</h3>
+      <p>A guided program that walks you through building your full productivity system — one step per day for a week. Complete all seven to earn your Champion badge.</p>
+    </div>
+
   </div>
 </section>
 
 <!-- FEATURE SPOTLIGHTS -->
 <section class="spotlight">
 
+  <!-- Smart Insights -->
+  <div class="spotlight-row">
+    <div class="spot-text">
+      <div class="spot-tag">Smart Insights</div>
+      <h2>Your data.<br><em>Actually understood.</em></h2>
+      <p>Most habit apps just record what you do. Daily goes further — it reads your patterns and tells you what they mean. No AI subscription needed. No prompts to write. It surfaces insights automatically, every time you open the Progress tab.</p>
+      <ul class="spot-bullets">
+        <li><strong>Best &amp; worst day of the week</strong> — based on 90 days of your real data</li>
+        <li><strong>Week-over-week trend</strong> — know if you're building momentum or drifting</li>
+        <li><strong>Gap detection</strong> — spots what's missing (no movement, no mindfulness, no sleep routine)</li>
+        <li><strong>Per-habit analysis</strong> — which routine is rock solid, which needs attention</li>
+        <li><strong>Milestone tracking</strong> — celebrates your 100th, 250th, 500th completion</li>
+      </ul>
+    </div>
+    <div class="spot-visual">
+      <div class="insight-vis">
+        <div class="iv-row iv-positive">
+          <div class="iv-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div>
+            <div class="iv-title">Tuesday is your strongest day</div>
+            <div class="iv-sub">70% average completion</div>
+          </div>
+        </div>
+        <div class="iv-row iv-coaching">
+          <div class="iv-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0112 4.5v15a2.5 2.5 0 01-5 0v-15A2.5 2.5 0 019.5 2z"/><path d="M14.5 8A2.5 2.5 0 0117 10.5v9a2.5 2.5 0 01-5 0v-9A2.5 2.5 0 0114.5 8z"/></svg>
+          </div>
+          <div>
+            <div class="iv-title">No mindfulness habit detected</div>
+            <div class="iv-sub">5 min of journaling daily builds real mental clarity over time</div>
+          </div>
+        </div>
+        <div class="iv-row iv-warning">
+          <div class="iv-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div>
+            <div class="iv-title">Fridays are your toughest</div>
+            <div class="iv-sub">27% average — plan ahead for this day</div>
+          </div>
+        </div>
+        <div class="iv-row iv-positive">
+          <div class="iv-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div>
+            <div class="iv-title">14-day active streak</div>
+            <div class="iv-sub">A full two weeks of showing up — keep the chain going</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compound Effect -->
+  <div class="spotlight-row flip">
+    <div class="spot-text">
+      <div class="spot-tag">The Compound Effect</div>
+      <h2>Small daily actions.<br><em>Massive results.</em></h2>
+      <p>20 pages a day is 7 books a year. 30 minutes of exercise is 182 hours of movement. Daily takes your current completion pace and projects it to December 31 — so you can see what you're actually building toward.</p>
+      <ul class="spot-bullets">
+        <li><strong>Year-end projection</strong> — based on your real pace, not an assumption</li>
+        <li><strong>Ahead / on track / behind</strong> — know exactly where you stand</li>
+        <li><strong>Context-aware facts</strong> — reads the habit name and gives meaningful equivalents</li>
+        <li><strong>Live progress bar</strong> — see how far along the year you are vs your target</li>
+        <li><strong>Up to 5 habits</strong> — sorted by biggest projected impact</li>
+      </ul>
+    </div>
+    <div class="spot-visual">
+      <div class="compound-vis">
+        <div class="cv-item">
+          <div class="cv-top">
+            <div class="cv-name">Morning Run</div>
+            <div class="cv-pill cv-ontk">on track</div>
+          </div>
+          <div class="cv-pace">On pace for <strong>112</strong> by Dec 31</div>
+          <div class="cv-bar-wrap">
+            <div class="cv-bar"><div class="cv-fill" style="width:76%"></div></div>
+            <span class="cv-done">85 done · 76%</span>
+          </div>
+          <div class="cv-fact">112 runs — aerobic base compounds daily</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-top">
+            <div class="cv-name">Read 30min a day</div>
+            <div class="cv-pill cv-ahead">ahead</div>
+          </div>
+          <div class="cv-pace">On pace for <strong>104</strong> by Dec 31</div>
+          <div class="cv-bar-wrap">
+            <div class="cv-bar"><div class="cv-fill" style="width:81%"></div></div>
+            <span class="cv-done">84 done · 81%</span>
+          </div>
+          <div class="cv-fact">~7 books at ~15 pages per session</div>
+        </div>
+        <div class="cv-item">
+          <div class="cv-top">
+            <div class="cv-name">Meditate</div>
+            <div class="cv-pill cv-ontk">on track</div>
+          </div>
+          <div class="cv-pace">On pace for <strong>98</strong> by Dec 31</div>
+          <div class="cv-bar-wrap">
+            <div class="cv-bar"><div class="cv-fill" style="width:75%"></div></div>
+            <span class="cv-done">74 done · 75%</span>
+          </div>
+          <div class="cv-fact">~16 hours of mental clarity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Streaks -->
   <div class="spotlight-row">
     <div class="spot-text">
       <div class="spot-tag">Streaks</div>
@@ -583,6 +612,7 @@
     </div>
   </div>
 
+  <!-- Goals -->
   <div class="spotlight-row flip">
     <div class="spot-text">
       <div class="spot-tag">Goals</div>
@@ -592,7 +622,7 @@
         <li><strong>Visual progress rings</strong> — see completion at a glance</li>
         <li><strong>Custom targets</strong> — numeric goals with milestones</li>
         <li><strong>Multiple active goals</strong> — track everything in parallel</li>
-        <li><strong>Manual progress updates</strong> — update whenever you hit a milestone</li>
+        <li><strong>Deadline tracking</strong> — Smart Insights alerts you when time is running out</li>
         <li><strong>Goal completion</strong> — mark done and celebrate the win</li>
       </ul>
     </div>
@@ -604,7 +634,7 @@
             <div class="goal-name-big">Run a 5K</div><div class="goal-pct-big">75%</div>
           </div>
           <div class="goal-track"><div class="goal-fill" style="width:75%"></div></div>
-          <div class="goal-sub">Target: end of July · 3 weeks left</div>
+          <div class="goal-sub">Target: end of month · 3 weeks left</div>
         </div>
         <div class="goal-item">
           <div class="goal-head">
@@ -642,7 +672,7 @@
 <section class="pricing" id="pricing">
   <p class="sec-label">Pricing</p>
   <h2 class="sec-title">Start free.<br><em>Upgrade when ready.</em></h2>
-  <p class="sec-sub">Daily is free to download and use. Unlock advanced features with Pro.</p>
+  <p class="sec-sub">Daily is free to download and use. Unlock everything with Pro.</p>
   <div class="price-grid">
     <div class="price-card">
       <div class="price-name">Free</div>
@@ -654,9 +684,10 @@
         <li>Basic streak tracking</li>
         <li>Daily reminders</li>
         <li class="dim">Unlimited habits</li>
-        <li class="dim">Tasks tab</li>
-        <li class="dim">Goals tab</li>
-        <li class="dim">Calendar view</li>
+        <li class="dim">Smart Insights</li>
+        <li class="dim">The Compound Effect</li>
+        <li class="dim">Tasks, Goals &amp; Calendar</li>
+        <li class="dim">Accountability Partner</li>
         <li class="dim">Progress dashboard</li>
       </ul>
     </div>
@@ -668,7 +699,9 @@
       <ul class="price-feats">
         <li>Everything in Free</li>
         <li>Unlimited habits</li>
-        <li>To-Do List</li>
+        <li>Smart Insights</li>
+        <li>The Compound Effect</li>
+        <li>Accountability Partner</li>
         <li>Tasks — weekly, monthly &amp; one-off</li>
         <li>Goals with progress rings</li>
         <li>Full calendar view</li>
@@ -698,24 +731,28 @@
   <h2 class="sec-title">Common<br><em>questions.</em></h2>
   <div class="faq-list">
     <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">What are Smart Insights? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Smart Insights is a feature on the Progress tab that automatically analyses your habit data and tells you what's working and what isn't. It spots your best and worst days of the week, catches week-over-week trends, identifies gaps in your routine (like no sleep wind-down or no movement habit), and flags which specific routines are slipping. No AI subscription — it runs entirely from your own data.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">What is the Compound Effect card? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">The Compound Effect card (on the Progress tab) takes your current completion pace for each habit and projects it to December 31. So if you're reading for 30 minutes a day at 76% completion, Daily calculates that you're on pace for around 99 sessions — roughly 7 books. It shows you whether you're ahead, on track, or behind, and gives real-world context for what each habit is building toward over a year.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">How does the Accountability Partner feature work? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">In your Profile (tap the user icon, top right), open the Accountability Partner section and tap Share Progress. Daily generates a unique 6-character code. Send that code to one trusted person — a friend, partner, or coach. They enter it in the Follow Partner tab in their own copy of Daily and immediately see your streak, weekly completion rate, level, and last 7 days of activity. It's completely private: no public profile, no social feed, just one person who can see your numbers.</div>
+    </div>
+    <div class="faq-item">
       <button class="faq-q" onclick="toggle(this)">Is Daily really free? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">Yes. Daily is free to download and includes habit tracking for up to 3 habits, streaks, and daily reminders. Pro unlocks unlimited habits, tasks, goals, calendar, and the progress dashboard.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggle(this)">What's included in Daily Pro? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">Pro gives you unlimited habits, the full Tasks tab (weekly, bi-weekly, monthly, one-off), the Goals tab with progress rings, the Calendar view, and the Progress dashboard with charts. It also unlocks all theme colour options.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggle(this)">Is Daily available on Android? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">Daily is currently iOS only. Android support may come in a future update.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggle(this)">How do reminders work? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">You can set a daily reminder at a time of your choosing. Daily will send a push notification each day to remind you to check in. You can enable, disable, or change the time at any point from inside the app.</div>
+      <div class="faq-a">Yes. Daily is free to download and includes habit tracking for up to 3 habits, streaks, and daily reminders. Pro unlocks unlimited habits, Smart Insights, the Compound Effect, Accountability Partner, Tasks, Goals, Calendar, and the full Progress dashboard.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggle(this)">What's the difference between habits and tasks? <span class="faq-arrow">+</span></button>
       <div class="faq-a">Habits are things you want to do every day — they build streaks and show up on your calendar. Tasks are things that recur on a schedule (weekly, monthly, etc.) or happen once — like "pay rent" or "send the report". Both appear in your Today view when they're due.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">Is Daily available on Android? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Daily is currently iOS only. Android support may come in a future update.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggle(this)">Can I cancel my subscription? <span class="faq-arrow">+</span></button>
@@ -772,7 +809,7 @@
       <svg width="22" height="22" viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="none" stroke="rgba(90,200,250,0.2)" stroke-width="18"/><circle cx="50" cy="50" r="36" fill="none" stroke="#5AC8FA" stroke-width="18" stroke-linecap="round" stroke-dasharray="170 56" transform="rotate(-90 50 50)"/></svg>
       Daily
     </div>
-    <div class="footer-tagline">The simple habit tracker for people who want to show up every day.</div>
+    <div class="footer-tagline">The intelligent habit tracker for people who want to show up every day.</div>
     <div class="footer-copy">© 2026 Daily · All rights reserved</div>
   </div>
   <div class="footer-col">
@@ -800,52 +837,28 @@
     if (!wasOpen) item.classList.add('open')
   }
 
-  // In-app browser (Instagram, Facebook, TikTok, etc.) detection
   ;(function () {
     var ua = navigator.userAgent || ''
     var isIAB = /Instagram|FBAN|FBAV|BytedanceWebview|musical_ly|TikTok|Twitter|Snapchat/i.test(ua)
     if (!isIAB) return
-
     var isIOS = /iPhone|iPad|iPod/i.test(ua)
     var tip = isIOS
       ? 'Tap <strong>···</strong> in the bottom-right corner, then tap <strong>"Open in Safari"</strong>.'
       : 'Tap the <strong>⋮</strong> menu, then tap <strong>"Open in browser"</strong>.'
-
     var banner = null
-
     function showBanner() {
-      if (banner) return  // already visible
+      if (banner) return
       banner = document.createElement('div')
       banner.innerHTML =
         '<div style="display:flex;align-items:flex-start;gap:12px;max-width:640px;margin:0 auto">' +
           '<svg style="flex-shrink:0;margin-top:1px" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5AC8FA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
-          '<div style="flex:1">' +
-            '<div style="font-size:14px;font-weight:700;color:#EFF6FF;margin-bottom:3px">Open in Safari to download the app</div>' +
-            '<div style="font-size:13px;color:#7BA4C4;line-height:1.5">' + tip + '</div>' +
-          '</div>' +
+          '<div style="flex:1"><div style="font-size:14px;font-weight:700;color:#EFF6FF;margin-bottom:3px">Open in Safari to download the app</div><div style="font-size:13px;color:#7BA4C4;line-height:1.5">' + tip + '</div></div>' +
           '<button id="iab-close" style="background:none;border:none;color:#4E6A88;cursor:pointer;padding:4px;font-size:20px;line-height:1;flex-shrink:0;margin-top:-2px">×</button>' +
         '</div>'
-      Object.assign(banner.style, {
-        position:            'fixed',
-        top:                 '64px',
-        left:                '0',
-        right:               '0',
-        zIndex:              '9999',
-        background:          'rgba(8,12,24,0.97)',
-        backdropFilter:      'blur(16px)',
-        WebkitBackdropFilter:'blur(16px)',
-        borderBottom:        '1px solid rgba(90,200,250,0.25)',
-        padding:             '14px 20px',
-        boxSizing:           'border-box',
-      })
+      Object.assign(banner.style, { position:'fixed', top:'64px', left:'0', right:'0', zIndex:'9999', background:'rgba(8,12,24,0.97)', backdropFilter:'blur(16px)', WebkitBackdropFilter:'blur(16px)', borderBottom:'1px solid rgba(90,200,250,0.25)', padding:'14px 20px', boxSizing:'border-box' })
       document.body.appendChild(banner)
-      document.getElementById('iab-close').onclick = function () {
-        banner.remove()
-        banner = null
-      }
+      document.getElementById('iab-close').onclick = function () { banner.remove(); banner = null }
     }
-
-    // Intercept all App Store buttons
     document.addEventListener('click', function (e) {
       var link = e.target.closest('a[href*="apps.apple.com"]')
       if (!link) return
